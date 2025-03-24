@@ -57,3 +57,25 @@ function updateDifficultyDisplay(level){
     difficultyBox.textContent = `Difficulty ${level.charAt(0).toUpperCase() + level.slice(1)}`
 
 }
+
+function guessLetter(){
+
+    let inputField = document.getElementById('letterInput')
+    let guessLetter = inputField.ariaValueMax.toLowerCase()
+
+    if(guessLetter.match(/^[a-z]$/)){
+        alert('please enter a valid letter (A-Z)')
+        inputField.value = ''
+        return
+    }
+
+    if(guessLetter.includes(guessLetter)){
+        alert('You already guessed `${guessedLetters}`. Try a different letter')
+        inputField.value = ''
+        return
+    }
+
+    if(selectWord.includes(guessedLetters)){
+        
+    }
+}
