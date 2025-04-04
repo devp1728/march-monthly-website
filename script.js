@@ -108,6 +108,7 @@ function guessLetter () {
 }
 
 function wrongGuess (guessedLetter) {
+  document.getElementById('wrongSound').play();
   wrongGuesses++ //increment the num of wrong guesses
   document.getElementById('wrongLetters').textContent += ` ${guessedLetter}` //add the guessed letter to HTML div
 
@@ -122,6 +123,7 @@ function wrongGuess (guessedLetter) {
 }
 
 function correctGuess (guessedLetter) {
+  document.getElementById('correctSound').play();
   let newDisplayedWord = ''
 
   for (let i = 0; i < selectedWord.length; i++) {
