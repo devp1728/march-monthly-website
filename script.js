@@ -23,6 +23,8 @@ let wrongGuessImages = [
   '/img/shamrock5.jpg',
   '/img/shamrock6.jpg'
 ];
+let winCount = 0;
+let lossCount = 0;
 
 function startGame (level) {
   selectedWord = getRandomWord(level)
@@ -146,14 +148,59 @@ function correctGuess (guessedLetter) {
 }
 
 function endGame(won){
-  if (won === true){
-    setTimeout(() => alert('you won'), 100)
-  }else {
-    setTimeout(() => alert(`Nah, Word was "${selectedWord}". 😞`), 100);
+  let messageEl = document.getElementById('resultMessage');
+  let input = document.getElementById('letterInput');
+  let button = document.getElementById('guessBtn');
+
+  if (won) {
+    winCount++;
+    messageEl.textContent = '🎉 You Won!';
+    messageEl.classList.remove('d-none', 'text-danger');
+    messageEl.classList.add('text-success');
+  } else {
+    lossCount++;
+    messageEl.textContent = `Nah, the word was "${selectedWord}". 😞`;
+    messageEl.classList.remove('d-none', 'text-success');
+    messageEl.classList.add('text-danger');
   }
+
+  // Update scoreboard
+  document.getElementById('winCount').textContent = winCount;
+  document.getElementById('lossCount').textContent = lossCount;
+
+  // Disable input and guess button
+  input.disabled = true;
+  button.disabled = true;
 }
+
 
 // /Restart Game - Reloads the page to reset everything
 function restartGame(){
-  location.reload()
+  selectedWord = '';
+  displayedWord = '';
+  wrongGuesses = 0;
+  guessedLetters = [];
+
+  // Reset displayed word and wrong guesses
+  document.getElementById('wordDisplay').textContent = '';
+  document.getElementById('wrongLetters').textContent = 'Wrong Guesses:';
+  document.getElementById('shamrock').src = 'img/shamrock.jpg';
+
+  // Reset input field and button
+  document.getElementById('letterInput').value = '';
+  document.getElementById('letterInput').disabled = false;
+  document.getElementById('guessBtn').disabled = false;
+
+  // Hide game and result message, show difficulty selection again
+  document.getElementById('gameArea').classList.add('d-none');
+  document.getElementById('gameArea').classList.remove('d-block');
+  document.getElementById('difficultyBox').classList.add('d-none');
+  document.getElementById('difficultyBox').classList.remove('d-block');
+  document.getElementById('difficultySelection').classList.remove('d-none');
 }
+// Enter key
+document.getElementById('letterInput').addEventListener('keyup', function (event) {
+  if (event.key === 'Enter') {
+    guessLetter();
+  }
+});
