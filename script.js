@@ -16,6 +16,13 @@ let displayedWord = ''
 let wrongGuesses = 0
 let guessedLetters = []
 const maxMistakes = 6
+let wrongGuessImages = [
+  'imgs/shamrock1.jpg',
+  'imgs/shamrock2.jpg',
+  'imgs/shamrock3.jpg',
+  'imgs/shamrock4.jpg',
+  'imgs/shamrock5.jpg'
+];
 
 function startGame (level) {
   selectedWord = getRandomWord(level)
