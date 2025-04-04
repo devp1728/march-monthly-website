@@ -15,13 +15,13 @@ let selectedWord = ''
 let displayedWord = ''
 let wrongGuesses = 0
 let guessedLetters = []
-const maxMistakes = 6
+const maxMistakes = 5
 let wrongGuessImages = [
-  'imgs/shamrock1.jpg',
-  'imgs/shamrock2.jpg',
-  'imgs/shamrock3.jpg',
-  'imgs/shamrock4.jpg',
-  'imgs/shamrock5.jpg'
+  '/img/shamrock1.jpg',
+  '/img/shamrock2.jpg',
+  '/img/shamrock4.jpg',
+  '/img/shamrock5.jpg',
+  '/img/shamrock6.jpg'
 ];
 
 function startGame (level) {
@@ -111,9 +111,10 @@ function wrongGuess (guessedLetter) {
   wrongGuesses++ //increment the num of wrong guesses
   document.getElementById('wrongLetters').textContent += ` ${guessedLetter}` //add the guessed letter to HTML div
 
-  document.getElementById('shamrock').src = `imgs/shamrock${
-    6 - wrongGuesses
-  }.jpg`
+  document.getElementById('shamrock').src = wrongGuessImages[wrongGuesses - 1]
+
+
+
 
   if (wrongGuesses === maxMistakes) {
     endGame(false)
@@ -144,8 +145,9 @@ function correctGuess (guessedLetter) {
 
 function endGame(won){
   if (won === true){
-    setTimeout(() => alert('yeay you won'), 100)
+    setTimeout(() => alert('you won'), 100)
   }else {
+    setTimeout(() => alert(`Nah, Word was "${selectedWord}". 😞`), 100);
   }
 }
 
